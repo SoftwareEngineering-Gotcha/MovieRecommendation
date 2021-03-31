@@ -1,0 +1,139 @@
+Movie Recommendation Web Service / recommendation
+Function
+recommendation : print the recommendation result
+
+Description
+Receive the data about matching relevant movies and Print this data to user.
+
+Inputs
+result of matching relevant movies
+
+Source
+result of matching relevant movies from matching function 
+
+Outputs
+RecommendedList - Processed List of matching relevant movies for user to see easily
+
+Destination
+None
+
+Actions
+RecommendedList is the result of edited list. From received data, edit the list sorted from high-score movies to low-score movies(descending order). List shows movie's name, genre, and relative score from matching.
+
+Pre-condition
+None
+
+Post-condition
+None
+
+Side effects
+None
+ 
+Movie Recommendation Web Service / load
+
+Function 
+Load movie list from database
+
+Description
+Load the list of movies from the database server according to the input.
+
+Inputs
+Classification of required movie list 
+
+Source - None
+
+Outputs
+movie list – required movie list
+
+Destination - None
+
+Action
+Load the list of movies from the database server according to the input
+
+Pre-condition - None
+
+Post-condition - None
+
+Side effects - None
+
+
+
+ 
+Movie Recommendation Web Service / provide
+
+Function 
+provide information received
+
+Description
+Provide clients with the materials they need
+
+Inputs
+movie list
+
+Source - None
+
+Outputs
+processed movie list
+Destination - None
+
+Action
+print out the value received as input on the screen
+
+Pre-condition - None
+
+Post-condition - None
+
+Side effects - None
+ 
+Movie Recommendation Web Service / askPreference
+Function: ask preference
+
+Description
+ Ask users about their preference about movie. Let them choose their preferred movie in list. And compute user’s preferred movie genre score matrix . 
+
+Inputs User’s preferred movie. 
+
+Output matrix which tells user’s preferred genre score
+
+
+Source : none
+
+Destination : none
+
+Action
+ If the website ask users to choose their preference. Function computes each movies’s genre score and make matrix about user’s preferred genre score matrix. This matrix is for recommending for movies. This matrix contains scores of preference for each genre.
+
+Requirements
+ Users need to choose large enough movies to get more precise recommendation
+
+Pre-condition none
+Post-condition none
+Side effects none
+Movie Recommendation Web Service / matching
+
+Function: matching
+
+Description
+ After computing user’s preferred genre score matrix, with it, Compute list for recommending movie.
+
+Input
+ User’s preferred genre score matrix
+
+Output
+ List of movie which this program recommends
+
+Source none
+
+Destination none
+
+Action
+ In user’s preferred genre score matrix, We compute score for the movie. We assume that there are each genre scores for movie. For example, A movie has 10points for action, 0 points for romance. After combining score (computing score), This function make list for recommendation.
+
+Requirements
+ Precise user’s preferred score matrix.
+
+Pre-condition none
+Post-condition none
+Side effects none
+
+ 
