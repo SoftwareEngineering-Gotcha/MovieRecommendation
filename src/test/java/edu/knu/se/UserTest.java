@@ -1,4 +1,4 @@
-package org.example;
+package edu.knu.se;
 
 import static org.junit.Assert.*;
 

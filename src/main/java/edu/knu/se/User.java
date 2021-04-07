@@ -1,4 +1,4 @@
-package org.example;
+package edu.knu.se;
 
 public class User {
     protected int id;
