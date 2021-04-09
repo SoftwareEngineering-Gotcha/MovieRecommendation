@@ -1,5 +1,3 @@
-package edu.knu.se;
-
 public class Movie {
 	private String title;
 	private String genre;

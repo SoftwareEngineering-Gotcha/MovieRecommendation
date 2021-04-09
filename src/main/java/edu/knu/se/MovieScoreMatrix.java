@@ -1,5 +1,3 @@
-package edu.knu.se;
-
 import java.util.List;
 
 public class MovieScoreMatrix {

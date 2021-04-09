@@ -1,5 +1,3 @@
-package edu.knu.se;
-
 public class User {
     protected int id;
     protected String name;
