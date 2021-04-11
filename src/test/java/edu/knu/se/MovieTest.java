@@ -1,3 +1,5 @@
+package edu.knu.se;
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.*;

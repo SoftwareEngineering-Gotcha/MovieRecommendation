@@ -1,12 +1,14 @@
-import java.util.List;
+package edu.knu.se;
+
+import java.util.ArrayList;
 
 public class User {
     private String id;
     private String name;
-    private List<Integer> genreScore;
-    private List<Integer> movieList;
+    private ArrayList<Integer> genreScore;
+    private ArrayList<Integer> movieList;
 
-    public User(String id, String name, List<Integer> genreScore, List<Integer> movieList){
+    public User(String id, String name, ArrayList<Integer> genreScore, ArrayList<Integer> movieList){
         this.id = id;
         this.name = name;
         this.genreScore = genreScore;
@@ -16,7 +18,7 @@ public class User {
     public boolean askPreference() {
         if(genreScore != null) {
             return true;
-        }else {
+        } else {
             return false;
         }
         //선호도 조사
