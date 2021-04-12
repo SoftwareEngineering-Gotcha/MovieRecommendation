@@ -10,19 +10,19 @@ public class OverallCal {
     User user = new User("A", "user", ugl, ml);
     MovieGenreScore moviegenrescore = new MovieGenreScore(mgs);
 
-    boolean matching(List<Integer> userGenreScore, List<Integer> genreScore){
+    private boolean matching(List<Integer> userGenreScore, List<Integer> genreScore){
         user.setMovieList(ml);
-        if(user.getMovieList().isEmpty()){
+        if (user.getMovieList().isEmpty()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    boolean calculate(){
-        if(moviegenrescore.getGenreScore()){
+    public boolean calculate(){
+        if (moviegenrescore.getGenreScore()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

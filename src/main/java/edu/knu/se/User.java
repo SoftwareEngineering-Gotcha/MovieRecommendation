@@ -49,7 +49,7 @@ public class User {
         return movieList;
     }
     public boolean provideMovieInfo() {
-        if(movieList != null) {
+        if(movieList != null) { 
             return true;
         }else {
             return false;
