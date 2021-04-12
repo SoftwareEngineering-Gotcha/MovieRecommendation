@@ -1,26 +1,34 @@
 package edu.knu.se;
 
-import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.*;
 import org.junit.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class MovieTest {
-		@Test
-		public void test_loadMovieInfo() {
-			Movie m1 = new Movie(1,"movie1","Romance" ,"Director");
-			ArrayList<Integer> genreTest = new ArrayList<>();
-			genreTest.add(1);
-			genreTest.add(4);
-			MovieGenreScore ms1 = new MovieGenreScore(genreTest);
-//			assertEquals("movie1RomanceDirector",m1.loadMovieInfo());
-		}
-//		@Test
-//		public void test_matching() {
-//			Movie m1 = new Movie("movie1","Romance" ,"Director");
-//			MovieGenreScore ms1 = new MovieGenreScore(1, 4);
-//			assertEquals(ms1.matching(1,4), false);
-//		}
+
+public class MovieTest{
+	public static Movie mv = null;
+	
+	@Before
+	public void setUp(){ // int movieId, String title, int genre, String director
+		mv = new Movie(11, "testMovieTitle", 5, "TestDirector");
+	}
+	@Test
+	public void TestgetMovieId(){
+		assertEquals("getMovieId is not successful", 11, mv.getMovieId());
+	}
+	
+	@Test
+	public void TestgetTitle(){
+		assertEquals("getTitle is not successful", "testMovieTitle", mv.getTitle());
+	}
+	
+	@Test
+	public void TestgetGenreId(){
+		assertEquals("getGenreId is not successful", 5, mv.getGenre());
+	}
+	
+	@Test
+	public void TestgetDirector(){
+		assertEquals("getDirector is not successful", "TestDirector", mv.getDirector());
+	}
 }
