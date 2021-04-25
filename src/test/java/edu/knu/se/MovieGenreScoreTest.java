@@ -11,13 +11,13 @@ public class MovieGenreScoreTest {
 
 	@Before
 	public void Setup(){
-		ArrayList<Integer> genreScore = new ArrayList<Integer>();
+		ArrayList<Integer> genreScore = new ArrayList();
 		mgs = new MovieGenreScore(genreScore);
 	}
 	
 	@Test
 	public void TestgetGenreScore(){
-		assertTrue("Result is not successful", mgs.getGenreScore());
+		assertNotNull("Result is not successful", mgs.getGenreScore());
 	}
 		
 }

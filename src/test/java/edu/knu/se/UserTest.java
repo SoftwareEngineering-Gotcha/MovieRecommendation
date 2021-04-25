@@ -43,4 +43,17 @@ public class UserTest {
     public void testGetName() {
         assertEquals("Name is not equal", "TestName", testUser.getName());
     }
+
+    @Test
+    public void testSetMovieList() {
+        boolean result;
+        ArrayList<Integer> testMovieList = new ArrayList<Integer>();
+        testMovieList.add(1);
+        testMovieList.add(2);
+        testMovieList.add(3);
+        testMovieList.add(4);
+        testMovieList.add(5);
+        result = testUser.setMovieList(testMovieList);
+        assertTrue("Set MovleList is not successful", result);
+    }
 }

@@ -1,30 +1,26 @@
 package edu.knu.se;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OverallCal {
-    ArrayList<Integer> ugl = new ArrayList<>();
-    ArrayList<Integer> ml = new ArrayList<>();
-    ArrayList<Integer> mgs = new ArrayList<>();
-    User user = new User("A", "user", ugl, ml);
-    MovieGenreScore moviegenrescore = new MovieGenreScore(mgs);
-
-    private boolean matching(List<Integer> userGenreScore, List<Integer> genreScore){
-        user.setMovieList(ml);
-        if (user.getMovieList().isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+    private ArrayList<Integer> matching(ArrayList<Integer> userGenreScore, ArrayList<Integer> genreScore){
+        // calculate recommendation matrix from user's genre score and all movie's genre score
+        if (userGenreScore != null && genreScore != null) {
+            ArrayList<Integer> result = new ArrayList();
+            return result;
+        } return null;
     }
 
-    public boolean calculate(){
-        if (moviegenrescore.getGenreScore()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    public ArrayList<Integer> calculate(ArrayList<Integer> userGenreScore){
+        // to call matching method. To use user's askPreference method.
+        ArrayList<Integer> mgs = new ArrayList<>(); // to make dummy MovieGenreScore
+        MovieGenreScore moviegenrescore = new MovieGenreScore(mgs); // to make dummy MovieGenreScore
 
+        ArrayList<Integer> genreScore = (ArrayList<Integer>) moviegenrescore.getGenreScore(); // to make dummy genreScore
+        // also in real, we have to get MovieGenreScore and get score to run matching.
+
+        ArrayList<Integer> result = matching(userGenreScore, genreScore); // run matching function to calculate and get MovieList for result of matching.
+
+        return result; // return MovieList
+    }
 }
