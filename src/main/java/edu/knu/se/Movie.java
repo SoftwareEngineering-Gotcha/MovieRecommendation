@@ -1,16 +1,16 @@
 package edu.knu.se;
 
+import java.util.ArrayList;
+
 public class Movie {
 	private int movieId;
 	private String title;
-	private int genre;
-	private String director;
-	
-	public Movie(int movieId, String title, int genre, String director) {
+	private ArrayList<Integer> genreId;
+
+	public Movie(int movieId, String title, ArrayList<Integer> genreId) {
 		this.movieId = movieId;
 		this.title = title;
-		this.genre = genre;
-		this.director =director;
+		this.genreId = genreId;
 	}
 
 	public int getMovieId() {
@@ -21,11 +21,8 @@ public class Movie {
 		return title;
 	}
 
-	public int getGenre() {
-		return genre;
+	public ArrayList<Integer> getGenreId() {
+		return genreId;
 	}
 
-	public String getDirector() {
-		return director;
-	}
 }
