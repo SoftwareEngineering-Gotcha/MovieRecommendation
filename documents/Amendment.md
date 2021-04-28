@@ -1,5 +1,5 @@
-#[Amendment] 4.25
-##Class diagram
+# [Amendment] 4.25
+## Class diagram
 
 - Add ArrayList<Integer> userGenreScore parameter to calculate() method in OverallCal Class.<br>
 	: To get a genre score from user class<br>
@@ -24,9 +24,9 @@
 - Change return type of getGenreScore() method in MovieGenreScore class List<Integer> to ArrayList<Integer><br>
 	: We do not use class inherited List class except ArrayList class.
 	
-#[Amendment] 4.12
+# [Amendment] 4.12
 
-##Class diagram
+## Class diagram
 
 [COMMON] Add get method for each class
 
@@ -43,7 +43,7 @@ Requirements Document
 
 #[Amendment] 4.7
 
-##Class diagram
+## Class diagram
 
 [COMMON] Add return type, factor entry for each method
 
