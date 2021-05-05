@@ -3,13 +3,15 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-userdb = []
 class userInfo:
     uid = ""
     passwd = ""
     def __init__(self, uid, passwd):
         self.uid = uid
         self.passwd = passwd
+userdb = []
+temp = userInfo("InitUser","Initpasswd")
+userdb.append(temp)
 
 @app.get("/")
 def read_root():
