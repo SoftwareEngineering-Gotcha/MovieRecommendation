@@ -3,6 +3,11 @@ FROM ubuntu:20.04
 RUN apt-get update && apt-get -y install openssh-server openjdk-8-jdk
 RUN apt-get -y install maven
 RUN apt-get -y install git
+RUN apt-get -y install curl
+RUN apt-get -y install python3
+RUN apt-get -y install python3-pip
+RUN pip3 install fastapi
+RUN pip3 install uvicorn
 
 
 RUN mkdir /var/run/sshd
@@ -19,15 +24,10 @@ CMD ["/usr/sbin/sshd", "-D"]
 ARG SSH_PRIVATE_KEY
 RUN mkdir /root/.ssh/
 RUN echo "$SSH_PRIVATE_KEY" >> ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
-# github.com을 신뢰할 수 있는 사이트로 등록. 만약 안 하면, Dockerfile 상에서 clone이 불가능
+
 RUN touch ~/.ssh/known_hosts
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 WORKDIR /root
 
 RUN git clone git@github.com:SoftwareEngineering-Gotcha/MovieRecommendation.git
-
-#RUN mkdir /root/project
-#WORKDIR /root/project
-#ADD project /root/project
-# RUN mvn test
