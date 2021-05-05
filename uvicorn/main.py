@@ -33,13 +33,7 @@ def delete_user(uid: Optional[str] = None):
     return {"result": result}
 
 @app.get("/users")
-def get_users(uid: Optional[str] = None, passwd: Optional[str] = None):
-    result = "FAILED"
-    if uid==None and passwd==None:
-        return userdb
-    for user in userdb:
-        if uid == user.uid and passwd == user.passwd:
-            result = "SUCCESS"
+def get_users():
     return userdb
 
 @app.get("/users/_count_")

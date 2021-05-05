@@ -1,9 +1,9 @@
 FROM ubuntu:20.04
 
 RUN apt-get update && apt-get -y install openssh-server openjdk-8-jdk
+RUN apt-get update && apt-get -y install curl
 RUN apt-get -y install maven
 RUN apt-get -y install git
-RUN apt-get -y install curl
 RUN apt-get -y install python3
 RUN apt-get -y install python3-pip
 RUN pip3 install fastapi
