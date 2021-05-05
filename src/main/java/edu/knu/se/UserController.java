@@ -33,7 +33,10 @@ public class UserController {
         List<User> list = repository.findAll();
         return list.size();
     }
-
+	/*
+	@PutMapping("/users/uid")
+	User replaceUser(@RequestBody 
+	*/
     @PutMapping("/users/{id}")
     User replaceUser(@RequestBody User newUser, @PathVariable String id){
         return repository.findById(id)
