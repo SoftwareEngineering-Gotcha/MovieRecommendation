@@ -17,6 +17,7 @@ class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(final UserRepository repository){
         return args -> {
+            //need to set program language level to 8
             ArrayList<Integer> arr = new ArrayList<Integer>();
             log.info("Preloading " + repository.save(new User("aaaa", "A", "1234", arr, arr)));
             log.info("Preloading " + repository.save(new User("bbbb", "A", "5678", arr, arr)));

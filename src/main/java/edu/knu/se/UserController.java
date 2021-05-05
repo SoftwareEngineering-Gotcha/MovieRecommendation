@@ -33,7 +33,7 @@ public class UserController {
         return repository.findById(id)
                 .map(user -> {
                     user.setId(newUser.getId());
-                    user.setName(newUser.getName());
+                    user.setPasswd(newUser.getPasswd());
                     return repository.save(user);
                 })
                 .orElseGet(() -> {

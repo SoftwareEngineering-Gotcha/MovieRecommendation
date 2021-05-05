@@ -51,6 +51,9 @@ public class User {
         this.name = name;
     }
 
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
     public String getPasswd() { return passwd; }
 
     public boolean setMovieList(ArrayList<Integer> movieList) {
@@ -63,7 +66,7 @@ public class User {
 
     @Override
     public int hashCode(){
-        return Objects.hash(this.id, this.name, this.userGenreScore, this.movieList);
+        return Objects.hash(this.id, this.name, this.passwd, this.userGenreScore, this.movieList);
     }
 
     @Override
