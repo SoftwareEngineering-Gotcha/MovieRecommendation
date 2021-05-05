@@ -1,8 +1,8 @@
-from typing import Optional
+
 from fastapi import FastAPI
 
 app = FastAPI()
-
+app.router.redirect_slashes = False
 
 userdb = {}
 
