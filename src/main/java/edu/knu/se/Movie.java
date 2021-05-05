@@ -1,9 +1,13 @@
 package edu.knu.se;
 
 import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class Movie {
-	private int movieId;
+	private @Id @GeneratedValue int movieId;
 	private String title;
 	private ArrayList<Integer> genreId;
 

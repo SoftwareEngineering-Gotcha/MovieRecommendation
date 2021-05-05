@@ -28,6 +28,12 @@ public class UserController {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
+    @GetMapping("/users/_count_")
+    int count(){
+        List<User> list = repository.findAll();
+        return list.size();
+    }
+
     @PutMapping("/users/{id}")
     User replaceUser(@RequestBody User newUser, @PathVariable String id){
         return repository.findById(id)
