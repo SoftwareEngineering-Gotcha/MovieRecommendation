@@ -24,7 +24,7 @@ public class UserTest {
         for(int i = 1; i <= 5; i++){
             initMovieList.add(10 + i);
         }
-        testUser = new User("admin", "TestName", initMovieScore, initMovieList); // dummy class identification
+        testUser = new User("admin", "TestName", "testPasswd", initMovieScore, initMovieList); // dummy class identification
     }
 
     @Test
