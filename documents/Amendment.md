@@ -1,3 +1,7 @@
+# [Amendment] 5.5
+## User Class
+- Password added in User Class
+
 # [Amendment] 4.25
 ## Class diagram
 
