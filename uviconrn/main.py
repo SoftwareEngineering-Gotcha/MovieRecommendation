@@ -1,37 +1,48 @@
 from typing import Optional
 from fastapi import FastAPI
 
-userdb = {}
-
 app = FastAPI()
+
+userdb = []
+class userInfo:
+    uid = ""
+    passwd = ""
+    def __init__(self, uid, passwd):
+        self.uid = uid
+        self.passwd = passwd
 
 @app.get("/")
 def read_root():
     return {"hello":"world"}
 
-@app.put("/users/")
-def read_item(uid: Optional[str] = None, passwd: Optional[str] = None):
+@app.put("/users")
+def put_user(uid: Optional[str] = None, passwd: Optional[str] =None):
     result = "FAILED"
     if uid != None and passwd != None:
-        userdb[uid] = passwd
+        userdb.append(userInfo(uid,passwd))
         result = "SUCCESS"
-    return {"uid": uid, "passwd": passwd, "result":result}
+    return {"result": result}
+
+@app.delete("/users")
+def delete_user(uid: Optional[str] = None):
+    result = "FAILED"
+    for user in userdb:
+        if uid == user.uid:
+            userdb.remove(user)
+            result = "SUCCESS"
+    return {"result": result}
 
 @app.get("/users")
-def print_item():
-    return userdb;
+def get_users(uid: Optional[str] = None, passwd: Optional[str] = None):
+    result = "FAILED"
+    if uid==None and passwd==None:
+        return userdb
+    for user in userdb:
+        if uid == user.uid and passwd == user.passwd:
+            result = "SUCCESS"
+    return userdb
 
 @app.get("/users/_count_")
-def print_count():
+def get_users_count():
     return len(userdb)
 
-@app.delete("/users/")
-def delete_item(uid: Optional[str] = None):
-    result = "FAILED"
-    if uid != None:
-        temp = userdb.keys()
-        if uid in temp:
-            del userdb[uid]
-            result = "SUCCESS"
-            return {"result" : result }
-    return {"result" : result }
