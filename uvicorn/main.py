@@ -18,7 +18,7 @@ def put_user(uid, passwd):
     result = "FAILED"
     a = userdb.keys()
     if uid in a:
-        result = "FAILED : Already Exist"
+        result = "FAILED"
         return { "result" : result}
     if uid != None and passwd != None:
         userdb[uid]=passwd
