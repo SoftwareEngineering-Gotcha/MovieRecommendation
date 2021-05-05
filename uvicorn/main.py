@@ -3,35 +3,35 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-class userInfo:
-    uid = ""
-    passwd = ""
-    def __init__(self, uid, passwd):
-        self.uid = uid
-        self.passwd = passwd
-userdb = []
-temp = userInfo("InitUser","Initpasswd")
-userdb.append(temp)
+
+userdb = {}
+
+userdb["initId1"] = "initpassWd1"
+userdb["initId2"] = "initpassWd2"
 
 @app.get("/")
 def read_root():
     return {"hello":"world"}
 
-@app.put("/users")
-def put_user(uid: Optional[str] = None, passwd: Optional[str] =None):
+@app.put("/users/")
+def put_user(uid, passwd):
     result = "FAILED"
+    a = userdb.keys()
+    if uid in a:
+        result = "FAILED : Already Exist"
+        return { "result" : result}
     if uid != None and passwd != None:
-        userdb.append(userInfo(uid,passwd))
+        userdb[uid]=passwd
         result = "SUCCESS"
     return {"result": result}
 
-@app.delete("/users")
-def delete_user(uid: Optional[str] = None):
+@app.delete("/users/")
+def delete_user(uid):
     result = "FAILED"
-    for user in userdb:
-        if uid == user.uid:
-            userdb.remove(user)
-            result = "SUCCESS"
+    a = userdb.keys()
+    if uid in a:
+        del userdb[uid]
+        result = "SUCCESS"
     return {"result": result}
 
 @app.get("/users")
@@ -41,4 +41,3 @@ def get_users():
 @app.get("/users/_count_")
 def get_users_count():
     return len(userdb)
-
