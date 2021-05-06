@@ -9,8 +9,8 @@ import javax.persistence.Lob;
 
 @Entity
 public class User {
-    private @Id String id;
-    private String name;
+    @Id
+    private String uid;
     private String passwd;
     @Lob
     private ArrayList<Integer> userGenreScore;
@@ -19,9 +19,8 @@ public class User {
 
     public User() {}
 
-    public User(String id, String name, String passwd, ArrayList<Integer> genreScore, ArrayList<Integer> movieList){
-        this.id = id;
-        this.name = name;
+    public User(String uid, String passwd, ArrayList<Integer> genreScore, ArrayList<Integer> movieList){
+        this.uid = uid;
         this.passwd = passwd;
         this.userGenreScore = genreScore;
         this.movieList = movieList;
@@ -36,19 +35,11 @@ public class User {
     }
 
     public String getId(){
-        return id;
+        return uid;
     }
 
-    public void setId(String id){
-        this.id = id;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name){
-        this.name = name;
+    public void setId(String uid){
+        this.uid = uid;
     }
 
     public void setPasswd(String passwd) {
@@ -66,11 +57,11 @@ public class User {
 
     @Override
     public int hashCode(){
-        return Objects.hash(this.id, this.name, this.passwd, this.userGenreScore, this.movieList);
+        return Objects.hash(this.uid, this.passwd, this.userGenreScore, this.movieList);
     }
 
     @Override
     public String toString(){
-        return "USER{" + "id= " + this.id + ", name= " + this.name + "}";
+        return "USER{" + "id= " + this.uid + ", pw= " + this.passwd + "}";
     }
 }

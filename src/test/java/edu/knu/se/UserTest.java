@@ -24,7 +24,7 @@ public class UserTest {
         for(int i = 1; i <= 5; i++){
             initMovieList.add(10 + i);
         }
-        testUser = new User("admin", "TestName", "qwer1234", initMovieScore, initMovieList); // dummy class identification
+        testUser = new User("admin", "qwer1234", initMovieScore, initMovieList); // dummy class identification
     }
 
     @Test
@@ -40,8 +40,8 @@ public class UserTest {
     }
 
     @Test
-    public void testGetName() {
-        assertEquals("Name is not equal", "TestName", testUser.getName());
+    public void testGetPasswd() {
+        assertEquals("Name is not equal", "qwer1234", testUser.getPasswd());
     }
 
     @Test

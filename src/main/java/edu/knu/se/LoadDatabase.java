@@ -18,8 +18,8 @@ class LoadDatabase {
     CommandLineRunner initDatabase(final UserRepository repository){
         return args -> {
             ArrayList<Integer> arr = new ArrayList<Integer>();
-            log.info("Preloading " + repository.save(new User("aaaa", "aaaa", "qwer1234", arr, arr)));
-            log.info("Preloading " + repository.save(new User("bbbb", "bbbb", "asdf1234", arr, arr)));
+            log.info("Preloading " + repository.save(new User("aaaa", "qwer1234", arr, arr)));
+            log.info("Preloading " + repository.save(new User("bbbb", "asdf1234", arr, arr)));
         };
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
     private final UserRepository repository;
 
@@ -12,47 +13,46 @@ public class UserController {
         this.repository = repository;
     }
 
-    @GetMapping("/users")
+    @GetMapping("")
     List<User> all(){
         return repository.findAll();
     }
 
-    @PostMapping("/users")
-    User newUser(@RequestBody User newUser){
-        return repository.save(newUser);
-    }
-
-    @GetMapping("/users/{id}")
-    User one(@PathVariable String id){
-        return repository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
-    }
-
-    @GetMapping("/users/_count_")
+    @GetMapping("/_count_")
     int count(){
         List<User> list = repository.findAll();
         return list.size();
     }
-	/*
-	@PutMapping("/users/uid")
-	User replaceUser(@RequestBody 
-	*/
-    @PutMapping("/users/{id}")
-    User replaceUser(@RequestBody User newUser, @PathVariable String id){
-        return repository.findById(id)
-                .map(user -> {
-                    user.setId(newUser.getId());
-                    user.setPasswd(newUser.getPasswd());
-                    return repository.save(user);
-                })
-                .orElseGet(() -> {
-                    newUser.setId(id);
-                    return repository.save(newUser);
-                });
+
+    @PutMapping("/")
+    String putUser(@RequestParam String uid, @RequestParam(name="passwd") String pwd) {
+        String result = "FAILED";
+        if(!(repository.existsById(uid))) {
+            User newUser = new User();
+            newUser.setId(uid);
+            newUser.setPasswd(pwd);
+            repository.save(newUser);
+            result = "SUCCESS";
+        } else {
+            repository.findById(uid)
+                    .map(user -> {
+                        user.setId(uid);
+                        user.setPasswd(pwd);
+                        repository.save(user);
+                        return "";
+                    });
+            result = "SUCCESS";
+        }
+        return "{\"result\":"+result+"\"}";
     }
 
-    @DeleteMapping("/users/{id}")
-    void deleteUser(@PathVariable String id){
-        repository.deleteById(id);
+    @DeleteMapping("/")
+    String deleteUid(@RequestParam String uid) {
+        String result = "FAILED";
+        if((repository.existsById(uid))) {
+            repository.deleteById(uid);
+            result = "SUCCESS";
+        }
+        return "{\"result\":\"" + result + "\"}";
     }
 }
