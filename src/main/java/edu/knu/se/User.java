@@ -62,6 +62,6 @@ public class User {
 
     @Override
     public String toString(){
-        return "USER{" + "id= " + this.uid + ", pw= " + this.passwd + "}";
+        return "{" + "\"uid\" : \"" + this.uid + "\", \"passwd\" : \"" + this.passwd + "\"}";
     }
 }

@@ -15,13 +15,20 @@ public class UserController {
 
     @GetMapping("")
     List<User> all(){
-        return repository.findAll();
+        List<User> result = repository.findAll();
+        return result;
     }
 
     @GetMapping("/_count_")
-    int count(){
+    String count(){
         List<User> list = repository.findAll();
-        return list.size();
+        return Integer.toString(list.size());
+    }
+
+    @GetMapping("/{uid}")
+    User one(@PathVariable String uid){
+        return repository.findById(uid)
+                .orElseThrow(() -> new UserNotFoundException(uid));
     }
 
     @PutMapping("/")
