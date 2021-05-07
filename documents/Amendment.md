@@ -1,5 +1,28 @@
 # [Amendment] 5.5
+## Class Diagram
+
+- variable "id" in User case changed name to "uid" 
+
+  : we have to use Spring API
+
+- variable "name" in User case deleted and added variable "passwd" 
+
+  : "name" is substituted to "uid" and we have to get "passwd" to use Spring API
+
+- method getId() changed name to getUid() 
+
+  : of unity between variable and method
+
+- method getName() in User case deleted and added method getPasswd() 
+
+  : User class doesn't have vairable "name" anymore and we added variable "passwd"
+
+- method setUid() and setPasswd() added in User case 
+
+  : we have to use Spring API
+
 ## User Class
+
 - Password added in User Class
 
 # [Amendment] 4.25
@@ -27,7 +50,6 @@
 	: We do not use class inherited List class except ArrayList class.
 - Change return type of getGenreScore() method in MovieGenreScore class List<Integer> to ArrayList<Integer><br>
 	: We do not use class inherited List class except ArrayList class.
-	
 # [Amendment] 4.12
 
 ## Class diagram
@@ -45,22 +67,21 @@ Requirements Document
 - Removed recommendationInfo(), loadMovieInfo()
 - Edited provideMovieInfo()
 
-#[Amendment] 4.7
+# #[Amendment] 4.7
 
 ## Class diagram
 
 [COMMON] Add return type, factor entry for each method
 
 - Add MovieScoreMatrix class<br>
-
 - GenreScore -> RomanceScore, actionScore<br>
-: Change for ease of implementation<br>
+  : Change for ease of implementation<br>
 - The MoiveScoreMatrix class has changed its relationship with Movie into an association:
 - Delete genre class<br>: It is unnecessary because it can be included as a property value in the movie class.
 - Use movie class -> movieScoreMatrix class to separate points for easy calculation.<br>
-Requirement documentation<br>
-uid : Spacing removed<br>
-User class :
+  Requirement documentation<br>
+  uid : Spacing removed<br>
+  User class :
 - Change the return value of the askPerference method to boolean for ease of implementation
 - Change the return value of the probideMovieInfo method to boolean for ease of implementation
 
