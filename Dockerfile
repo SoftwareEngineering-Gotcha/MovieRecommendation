@@ -30,4 +30,5 @@ RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 WORKDIR /root
 
+RUN mkdir /root/test1/
 RUN git clone git@github.com:SoftwareEngineering-Gotcha/MovieRecommendation.git

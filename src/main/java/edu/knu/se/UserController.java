@@ -9,7 +9,7 @@ import java.util.List;
 public class UserController {
     private final UserRepository repository;
 
-    UserController(UserRepository repository) {
+    UserController(UserRepository repository){
         this.repository = repository;
     }
 
@@ -19,37 +19,31 @@ public class UserController {
     }
 
     @GetMapping("/_count_")
-    String count(){
+    int count(){
         List<User> list = repository.findAll();
-        return Integer.toString(list.size());
-    }
-
-    @GetMapping("/{uid}")
-    User one(@PathVariable String uid){
-        return repository.findById(uid)
-                .orElseThrow(() -> new UserNotFoundException(uid));
+        return list.size();
     }
 
     @PutMapping("/")
-    String putUser(@RequestParam String uid, @RequestParam String passwd) {
+    String putUser(@RequestParam String uid, @RequestParam(name="passwd") String pwd) {
         String result = "FAILED";
         if(!(repository.existsById(uid))) {
             User newUser = new User();
             newUser.setUid(uid);
-            newUser.setPasswd(passwd);
+            newUser.setPasswd(pwd);
             repository.save(newUser);
             result = "SUCCESS";
         } else {
             repository.findById(uid)
                     .map(user -> {
                         user.setUid(uid);
-                        user.setPasswd(passwd);
+                        user.setPasswd(pwd);
                         repository.save(user);
                         return "";
                     });
             result = "SUCCESS";
         }
-        return "{\"result\":" + result + "\"}";
+        return "{\"result\":"+result+"\"}";
     }
 
     @DeleteMapping("/")
