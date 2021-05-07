@@ -35,13 +35,27 @@ public class UserTest {
     }
 
     @Test
-    public void testGetID() {
+    public void testGetUiD() {
         assertEquals("Id is not equal", "admin", testUser.getUid());
     }
 
     @Test
     public void testGetPasswd() {
         assertEquals("Name is not equal", "qwer1234", testUser.getPasswd());
+    }
+
+    @Test
+    public void testSetUiD() {
+        String test = "testname";
+        testUser.setUid(test);
+        assertEquals("Uid is not equal", test, testUser.getUid());
+    }
+
+    @Test
+    public void testSetPasswd() {
+        String test = "asdf1234";
+        testUser.setPasswd(test);
+        assertEquals("Name is not equal", test, testUser.getPasswd());
     }
 
     @Test
