@@ -36,7 +36,7 @@ public class UserTest {
 
     @Test
     public void testGetID() {
-        assertEquals("Id is not equal", "admin", testUser.getId());
+        assertEquals("Id is not equal", "admin", testUser.getUid());
     }
 
     @Test

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
 @Entity
 public class User {
-    @Id
-    private String uid;
+    private @Id String uid;
     private String passwd;
     @Lob
     private ArrayList<Integer> userGenreScore;
@@ -34,11 +34,11 @@ public class User {
         }
     }
 
-    public String getId(){
+    public String getUid(){
         return uid;
     }
 
-    public void setId(String uid){
+    public void setUid(String id){
         this.uid = uid;
     }
 
@@ -61,7 +61,7 @@ public class User {
     }
 
     @Override
-    public String toString(){
-        return "{" + "\"uid\" : \"" + this.uid + "\", \"passwd\" : \"" + this.passwd + "\"}";
+    public String toString() {
+        return "{" + "\"uid\" = \"" + this.uid + "\", \"passwd\" = \"" + this.passwd + "\"}";
     }
 }
