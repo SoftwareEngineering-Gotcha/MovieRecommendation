@@ -1,14 +1,15 @@
 package edu.knu.se;
-
+import java.io.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.core.io.*;
+import java.util.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
     private final UserRepository repository;
-
+    List<String> data; 
     UserController(UserRepository repository){
         this.repository = repository;
     }
@@ -24,6 +25,28 @@ public class UserController {
         return list.size();
     }
 
+    @GetMapping("/")
+    List<String> return_movie(@RequestParam String uid){
+    
+        try {
+            File csv = new File("ratings.csv");
+            data = new ArrayList<String>();
+            BufferedReader br = new BufferedReader(new FileReader(csv));
+            String line = "";
+            while ((line = br.readLine()) != null){
+                String[] token = line.split(",", -1);
+                if(token[0].equals(uid))
+                {
+                    data.add(token[1]);
+                }
+            }
+        } catch(FileNotFoundException e){
+            e.printStackTrace();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        return data;
+    }
     @PutMapping("/")
     String putUser(@RequestParam String uid, @RequestParam(name="passwd") String pwd) {
         String result = "FAILED";
