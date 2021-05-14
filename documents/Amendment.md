@@ -3,8 +3,8 @@
 
 - Sequence Diagram title changed<br>
 	: Sequence Diagram title matched with Usecase Diagram
-	<br>
-- State Diagram exception handled<br><br>
+	<br><br>
+- State Diagram exception handled<br>
 	: State Diagram can't be straight, added exception handlings
 
 # [Amendment] 5.5
