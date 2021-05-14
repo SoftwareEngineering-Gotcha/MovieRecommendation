@@ -1,10 +1,10 @@
 # [Amendment] 5.14
 ## Class Diagram
 
-- Sequence Diagram title changed
+- Sequence Diagram title changed<br>
 	: Sequence Diagram title matched with Usecase Diagram
-	
-- State Diagram exception handled
+	<br>
+- State Diagram exception handled<br>
 	: State Diagram can't be straight, added exception handlings
 
 # [Amendment] 5.5
