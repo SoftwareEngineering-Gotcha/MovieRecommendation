@@ -16,6 +16,7 @@ class user_movies {
 public class UserController {
     BufferedWriter bw = null;
     BufferedWriter bwuser = null;
+    BufferedReader read_bwuser = null;
     private final UserRepository repository;
     List<String> data; 
     UserController(UserRepository repository){
@@ -60,24 +61,19 @@ public class UserController {
         String result = "FAILED";
         try {
             File csv_user = new File("Users.csv");
-            bwuser = new BufferedWriter(new FileWriter(csv_user));
-            if (!(repository.existsById(uid))) {
-
-                User newUser = new User();
-                newUser.setUid(uid);
-                newUser.setPasswd(pwd);
-                repository.save(newUser);
-                result = "SUCCESS";
-            } else {
-                repository.findById(uid)
-                        .map(user -> {
-                            user.setUid(uid);
-                            user.setPasswd(pwd);
-                            repository.save(user);
-                            return "";
-                        });
-                result = "SUCCESS";
+            read_bwuser = new BufferedReader(new FileReader(csv_user));
+            bwuser = new BufferedWriter(new FileWriter(csv_user,true));
+            String line ="";
+            while((line = read_bwuser.readLine()) != null){
+                String[] token = line.split(",", -1);
+                if(token[0].equals(uid)){
+                    return "{\"result\":"+result+"\"}";;
+                }
             }
+            bwuser.write(uid);
+            bwuser.write(',');
+            bwuser.write(pwd);
+            bwuser.write('\n');
         } catch(FileNotFoundException e){
 
         } catch(IOException e){
