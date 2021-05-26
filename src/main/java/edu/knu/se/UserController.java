@@ -4,6 +4,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.core.io.*;
 import java.util.*;
 
+class user_movies {
+    String name;
+    int movie_id;
+    int rating;
+    String password;
+}
 
 @RestController
 @RequestMapping("/users")
@@ -27,7 +33,6 @@ public class UserController {
 
     @GetMapping("/")
     List<String> return_movie(@RequestParam String uid){
-    
         try {
             File csv = new File("ratings.csv");
             data = new ArrayList<String>();
@@ -47,8 +52,9 @@ public class UserController {
         }
         return data;
     }
-    @PutMapping("/")
-    String putUser(@RequestParam String uid, @RequestParam(name="passwd") String pwd) {
+
+    @PutMapping("/{userid}")
+    String putUser(@PathVariable(name="userid") String uid, @RequestParam(name="passwd") String pwd) {
         String result = "FAILED";
         if(!(repository.existsById(uid))) {
             User newUser = new User();
@@ -69,8 +75,8 @@ public class UserController {
         return "{\"result\":"+result+"\"}";
     }
 
-    @DeleteMapping("/")
-    String deleteUid(@RequestParam String uid) {
+    @DeleteMapping("/{userid}")
+    String deleteUid(@PathVariable(name="userid") String uid) {
         String result = "FAILED";
         if((repository.existsById(uid))) {
             repository.deleteById(uid);
