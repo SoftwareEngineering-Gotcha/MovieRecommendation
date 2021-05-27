@@ -74,15 +74,15 @@ public class UserController {
         String[] data;
         for(int i = 0 ; i < list.size(); i++){
             data = list.get(i).split(",");
-            // System.out.println(list.get(i));
-            // System.out.println(data);
             if (i != 0) {
                 temp = new User(data[0], data[1], null, null);
                 result.add(temp);
             }
         }
 
-        return list.size() - 1;
+        int size = list.size() - 1;
+        if(size == -1) size = 0;
+        return size;
     }
 
     @GetMapping("/{userid}/ratings") // rating만 뜨도록 설정 완료
@@ -118,7 +118,6 @@ public class UserController {
             BufferedReader bufReader = new BufferedReader(filereader);
             String line = "";
             while((line = bufReader.readLine()) != null){
-                System.out.println(line);
                 list.add(line);
             }
             bufReader.close();
@@ -131,8 +130,6 @@ public class UserController {
         String[] data;
         for(int i = 0 ; i < list.size(); i++){ // list에 있는 string의 data를 추출해서 uid를 비교
             data = list.get(i).split(",");
-            System.out.println(list.get(i));
-            System.out.println(data[0] + "," + data[1]);
             if (uid.equals(data[0])) { // 같은 게 있으면 안됨
                 return "{\"result\":"+result+"\"}";
             }
@@ -147,10 +144,8 @@ public class UserController {
 
             if(file.isFile() && file.canWrite()){
                 for(int i = 0; i < list.size() ; i++) {
-                    System.out.println(list.get(i));
                     bufferedWriter.write(list.get(i));
                     bufferedWriter.newLine();
-                    System.out.println("Write Success");
                 }
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -163,8 +158,8 @@ public class UserController {
         return "{\"result\":"+result+"\"}";
     }
 
-    @PutMapping("/{uid}/ratings") // 400에러 떳음 확인 필요
-    String Testing(@PathVariable("uid")String uid,@RequestParam("movie") String movie_id,@RequestParam("rating") float rating){
+    @PutMapping("/{uid}/ratings")
+    String putRating(@PathVariable("uid")String uid,@RequestParam("movie") String movie_id,@RequestParam("rating") float rating){
         String result = "FAILED";
         List<String> movielist = new ArrayList<String>();
 
@@ -178,7 +173,6 @@ public class UserController {
             BufferedReader bufReader = new BufferedReader(filereader);
             String line = "";
             while((line = bufReader.readLine()) != null){
-                System.out.println(line);
                 movielist.add(line);
             }
             bufReader.close();
@@ -190,9 +184,7 @@ public class UserController {
 
         try {
             File csv_write = new File("ratings.csv");
-            File csv_user = new File("user.csv");
             File csv = new File("movies.csv");
-            bwuser = new BufferedWriter(new FileWriter(csv_user));
             bw = new BufferedWriter(new FileWriter(csv_write,true));
             BufferedReader brd = new BufferedReader((new FileReader(csv_write)));
 
@@ -203,8 +195,8 @@ public class UserController {
             String s_rating = new String(Float.toString(rating));
             while ((line = br.readLine()) != null){
                 String[] token = line.split(",", -1);
-                if(token[0].equals(movie_id))
-                {
+                if(token[1].equals(movie_id) && token[0].equals(uid)) return "{\"result\":"+"FAILED"+"\"}";
+                if(token[1].equals(movie_id)) {
                     bw.write(uid);
                     bw.write(',');
                     bw.write(movie_id);
@@ -235,37 +227,32 @@ public class UserController {
 
         List<String> list = new ArrayList<String>();
 
+        System.out.println("Starting Delete. Loading File");
         try{
             File file = new File("user.csv");
             FileReader filereader = new FileReader(file);
             BufferedReader bufReader = new BufferedReader(filereader);
             String line = "";
             while((line = bufReader.readLine()) != null){
-                System.out.println(line);
                 list.add(line);
             }
             bufReader.close();
         }catch (FileNotFoundException e) {
+            e.printStackTrace();
             return "{\"result\":\"" + result + "\"}";
         }catch(IOException e){
+            e.printStackTrace();
             return "{\"result\":\"" + result + "\"}";
         }
 
         String[] data;
         for(int i = 0 ; i < list.size(); i++){ // list에 있는 string의 data를 추출해서 uid를 비교
             data = list.get(i).split(",");
-            System.out.println(list.get(i));
-            System.out.println(data[0] + "," + data[1]);
             if (uid.equals(data[0])) { // 같은 게 있으면 제거
                 result = "SUCCESS";
                 list.remove(i);
                 break;
             }
-        }
-
-        System.out.println("After removed");
-        for(int i = 0; i < list.size() ; i++) {
-            System.out.println(list.get(i));
         }
 
         try{
@@ -274,15 +261,14 @@ public class UserController {
 
             if(file.isFile() && file.canWrite()){
                 for(int i = 0; i < list.size() ; i++) {
-                    System.out.println(list.get(i));
                     bufferedWriter.write(list.get(i));
                     bufferedWriter.newLine();
-                    System.out.println("Write Success");
                 }
                 bufferedWriter.flush();
                 bufferedWriter.close();
             }
         } catch (IOException e) {
+            e.printStackTrace();
             return "{\"result\":\"" + "FAILED" + "\"}";
         }
 
