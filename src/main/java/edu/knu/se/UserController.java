@@ -168,7 +168,7 @@ public class UserController {
         if((rating%0.5) != 0.0) return "{\"result\":"+result+"\"}";
 
         try{
-            File file = new File("user.csv");
+            File file = new File("movies.csv");
             FileReader filereader = new FileReader(file);
             BufferedReader bufReader = new BufferedReader(filereader);
             String line = "";
@@ -176,9 +176,9 @@ public class UserController {
                 movielist.add(line);
             }
             bufReader.close();
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             return "{\"result\":\"" + result + "\"}";
-        }catch(IOException e){
+        } catch(IOException e){
             return "{\"result\":\"" + result + "\"}";
         }
 
@@ -193,10 +193,9 @@ public class UserController {
             String d_line = "";
 
             String s_rating = new String(Float.toString(rating));
-            while ((line = br.readLine()) != null){
-                String[] token = line.split(",", -1);
-                if(token[1].equals(movie_id) && token[0].equals(uid)) return "{\"result\":"+"FAILED"+"\"}";
-                if(token[1].equals(movie_id)) {
+            while ((line = br.readLine()) != null) {
+                String[] token = line.split(",", -1); // movie
+                if (token[0].equals(movie_id)) {
                     bw.write(uid);
                     bw.write(',');
                     bw.write(movie_id);
@@ -209,8 +208,9 @@ public class UserController {
                     result = "SUCCESS";
                     bw.flush();
                     bw.close();
-                }
+                 }
             }
+
         } catch(FileNotFoundException e){
             e.printStackTrace();
         } catch(IOException e){
