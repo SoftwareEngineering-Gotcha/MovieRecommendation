@@ -1,0 +1,24 @@
+volumes:
+    oracle_data: {}
+services:
+    db:
+        build:
+            context: ./DBDockerfile
+            args:
+                - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
+        ports:
+            - "49161:1521"
+        volumes:
+            - .:/duo
+        environment:
+            - ORACLE_ALLOW_REMOTE=true
+            - MYSQL_ROOT_USER=root
+            - MYSQL_ROOT_PASSWORD=secret
+            - MYSQL_DATABASE=my_database_name
+    web:
+        build:
+            context: .
+            args:
+                - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
+        ports:
+            - "12000:22"
