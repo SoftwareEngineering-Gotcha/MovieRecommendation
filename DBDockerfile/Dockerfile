@@ -20,7 +20,7 @@ RUN cp movies.sql /docker-entrypoint-initdb.d/
 RUN cp ratings.sql /docker-entrypoint-initdb.d/
 RUN cp user.sql /docker-entrypoint-initdb.d/
 RUN cp init_movies_seq.sql /docker-entrypoint-initdb.d/
-RUN cp init_userss_seq.sql /docker-entrypoint-initdb.d/
+RUN cp init_users_seq.sql /docker-entrypoint-initdb.d/
 RUN cp init_ratings_seq.sql /docker-entrypoint-initdb.d/
 
 WORKDIR /root
