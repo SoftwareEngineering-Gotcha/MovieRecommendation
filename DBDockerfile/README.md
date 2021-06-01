@@ -7,5 +7,13 @@
 3. 다음을 입력하여 sql 파일을 삭제
 
 rm /docker-entrypoint-initdb.d/movies.sql
+  
 rm /docker-entrypoint-initdb.d/user.sql
+  
 rm /docker-entrypoint-initdb.d/ratings.sql
+
+rm /docker-entrypoint-initdb.d/init_movies_seq.sql
+
+rm /docker-entrypoint-initdb.d/init_users_seq.sql
+
+rm /docker-entrypoint-initdb.d/init_ratings_seq.sql
