@@ -1,4 +1,4 @@
-package edu.knu.se;
+package edu.knu.se.service;
 
 public class UserNotFoundException extends RuntimeException{
     public UserNotFoundException(String id){

@@ -1,7 +1,9 @@
-package edu.knu.se;
+package edu.knu.se.service;
+
+import edu.knu.se.domain.MovieGenreScore;
 
 import java.util.ArrayList;
-
+/*
 public class OverallCal {
     private ArrayList<Integer> matching(ArrayList<Integer> userGenreScore, ArrayList<Integer> genreScore){
         // calculate recommendation matrix from user's genre score and all movie's genre score
@@ -24,3 +26,4 @@ public class OverallCal {
         return result; // return MovieList
     }
 }
+*/

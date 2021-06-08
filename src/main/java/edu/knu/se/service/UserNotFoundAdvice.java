@@ -1,4 +1,4 @@
-package edu.knu.se;
+package edu.knu.se.service;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

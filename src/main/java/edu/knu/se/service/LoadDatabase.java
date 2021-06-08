@@ -1,5 +1,6 @@
-package edu.knu.se;
+package edu.knu.se.service;
 
+import edu.knu.se.repository.UserRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +19,8 @@ class LoadDatabase {
     CommandLineRunner initDatabase(final UserRepository repository){
         return args -> {
             ArrayList<Integer> arr = new ArrayList<Integer>();
-            log.info("Preloading " + repository.save(new User("aaaa", "qwer1234", arr, arr)));
-            log.info("Preloading " + repository.save(new User("bbbb", "asdf1234", arr, arr)));
+            //log.info("Preloading " + repository.save(new User("aaaa", "qwer1234", arr, arr)));
+            //log.info("Preloading " + repository.save(new User("bbbb", "asdf1234", arr, arr)));
         };
     }
 }
