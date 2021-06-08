@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @SequenceGenerator(
 		name = "FOR_MGS_SEQ",
-		sequenceName = "seq_movie",
+		sequenceName = "seq_mgs",
 		initialValue = 1,
 		allocationSize = 1
 )
