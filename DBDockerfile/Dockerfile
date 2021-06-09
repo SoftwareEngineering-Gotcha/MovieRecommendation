@@ -13,7 +13,7 @@ RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 WORKDIR /root
 
-RUN git clone -b ver.db --single-branch git@github.com:SoftwareEngineering-Gotcha/MovieRecommendation.git
+RUN git clone git@github.com:SoftwareEngineering-Gotcha/MovieRecommendation.git
 
 WORKDIR /root/MovieRecommendation/sql
 RUN cp movies.sql /docker-entrypoint-initdb.d/
