@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import edu.knu.se.controller.UserController;
 import edu.knu.se.domain.Movie;
+import edu.knu.se.domain.Ratings;
 import edu.knu.se.domain.User;
 import edu.knu.se.repository.UserRepository;
 import edu.knu.se.service.MovieService;
@@ -28,6 +29,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.*;
+import java.util.List;
 
 
 @RunWith(SpringRunner.class)
@@ -67,6 +69,37 @@ public class UserControllerTest {
     @Test
     public void count_test(){
         assertEquals(temp_count + 2,usr.count());
+    }
+
+    @Test
+    public void deleteTest(){
+        temp_count--;
+        assertEquals("{\"result\":\"SUCCESS\"}",usr.deleteUid("test"));
+
+    }
+
+    @Test //R2
+    public void put_user_test(){
+        temp_count++;
+        assertEquals("{\"result\":SUCCESS\"}", usr.putUser("test3", "testpwd"));
+    }
+
+    @Test // R4
+    public void get_user_test(){
+        List<User> list = userService.findMember();
+        assertEquals(list.size(),usr.all().size());
+    }
+
+    @Test
+    public void r6_test(){
+        assertEquals("{\"result\":SUCCESS\"}", usr.putRating("test", new Long(1),new Float(1.0)));
+
+    }
+
+    @Test
+    public void r7_test(){
+        List<Ratings> list = ratingsService.findByUserid("test");
+        assertEquals(list.size(), usr.return_rating("test").size());
     }
 
 }

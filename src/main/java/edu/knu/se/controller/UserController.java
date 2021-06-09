@@ -46,8 +46,9 @@ public class UserController {
     }
 
 
-    @PutMapping("/")
-    String putUser(@RequestParam(name = "uid") String uid, @RequestParam(name="passwd") String pwd) {
+
+    @PutMapping("")
+    public String putUser(@RequestParam(name = "uid") String uid, @RequestParam(name="passwd") String pwd) {
         String result = "FAILED";
 
         if(!(userService.ExistsOnebyUserid(uid))) {
@@ -62,7 +63,7 @@ public class UserController {
     }
 
     @GetMapping("/{userid}/ratings")
-    List<Ratings> return_rating(@PathVariable(name = "userid") String userid)
+    public List<Ratings> return_rating(@PathVariable(name = "userid") String userid)
     {
         if(userService.ExistsOnebyUserid(userid))
         {
@@ -75,7 +76,7 @@ public class UserController {
     }
 
     @GetMapping("/")
-    List<String> return_movie(@RequestParam Long uid){
+    public List<String> return_movie(@RequestParam Long uid){
     
         try {
             File csv = new File("ratings.csv");
@@ -99,7 +100,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userid}")
-    String deleteUid(@PathVariable(name = "userid") String uid) {
+    public String deleteUid(@PathVariable(name = "userid") String uid) {
         String result = "FAILED";
         if((userService.ExistsOnebyUserid(uid))) {
             userService.deleteByUserid(uid);
@@ -110,21 +111,25 @@ public class UserController {
 
     //R6
     @PutMapping("/{uid}/ratings")
-    String putRating(@PathVariable("uid")String uid,@RequestParam("movie") Long movie_id, @RequestParam("rating") float rating) {
+    public String putRating(@PathVariable("uid")String uid,@RequestParam("movie") Long movie_id, @RequestParam("rating") float rating) {
         String result = "FAILED";
         Ratings temp = new Ratings();
 
         List<Ratings> list = ratingsService.findByUserid(uid); // uid를 바탕으로 해당 uid가 평가한 ratings들을 불러옴
-
+        System.out.println("통과1");
         if(!(userService.ExistsOnebyUserid(uid))) // 없는 User이면
             return "{\"result\":"+ result +"\"}"; // 실패 반환
-
+        System.out.println("통과2");
+        System.out.println(movieService.ExistsById(movie_id));
+        /*
         if(!(movieService.ExistsById(movie_id))) // 없는 movie이면
             return "{\"result\":"+ result +"\"}"; // 실패 반환
 
+         */
+        System.out.println("통과3");
         if(!(rating >= 1 && rating <= 5)) return "{\"result\":"+result+"\"}"; // 1 미만 5 초과
         if((rating%0.5) != 0.0) return "{\"result\":"+result+"\"}"; // n.0 또는 n.5가 아님
-
+        System.out.println("통과4");
 
 
         for(int i = 0; i < list.size(); i++) { // uid에 해당하는 User가 평가한 영화 목록 중에서 이미 평가한 영화인지 확인
@@ -136,7 +141,7 @@ public class UserController {
                 temp.setTimestamp(timestamp / 1000); // timestamp 설정
                 result = "SUCCESS"; // 성공
                 ratingsService.join(temp); // DB에 저장
-                return "{\"result\":"+ result +"\"}";
+                return "{\"result\":"+result+"\"}";
             }
         }
 
@@ -149,7 +154,7 @@ public class UserController {
         result = "SUCCESS"; // 성공
         ratingsService.join(temp); // DB에 저장
 
-        return "{\"result\":"+ result +"\"}";
+        return "{\"result\":"+result+"\"}";
     }
 
 }
