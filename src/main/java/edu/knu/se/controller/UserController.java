@@ -39,6 +39,7 @@ public class UserController {
         return userService.findMember();
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/_count_")
     public int count(){
         List<User> list = userService.findMember();
@@ -46,7 +47,7 @@ public class UserController {
     }
 
 
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @PutMapping("")
     public String putUser(@RequestParam(name = "uid") String uid, @RequestParam(name="passwd") String pwd) {
         String result = "FAILED";
@@ -61,7 +62,7 @@ public class UserController {
 
         return "{\"result\":"+result+"\"}";
     }
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/{userid}/ratings")
     public List<Ratings> return_rating(@PathVariable(name = "userid") String userid)
     {
@@ -74,7 +75,7 @@ public class UserController {
         return null;
 
     }
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/")
     public List<String> return_movie(@RequestParam Long uid){
     
@@ -98,7 +99,7 @@ public class UserController {
         }
         return data;
     }
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @DeleteMapping("/{userid}")
     public String deleteUid(@PathVariable(name = "userid") String uid) {
         String result = "FAILED";
@@ -110,6 +111,7 @@ public class UserController {
     }
 
     //R6
+    @CrossOrigin(origins = "http://localhost:8080")
     @PutMapping("/{uid}/ratings")
     public String putRating(@PathVariable("uid")String uid,@RequestParam("movie") Long movie_id, @RequestParam("rating") float rating) {
         String result = "FAILED";

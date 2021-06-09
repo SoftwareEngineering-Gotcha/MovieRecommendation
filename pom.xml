@@ -65,7 +65,16 @@
           <artifactId>lombok</artifactId>
           <scope>test</scope>
       </dependency>
-
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.oracle.ojdbc</groupId>
+      <artifactId>orai18n</artifactId>
+      <version>19.3.0.0</version>
+    </dependency>
   </dependencies>
 
   <build>

@@ -24,7 +24,7 @@
     $("#request_cnt").click(function () {
       $.ajax({
         type: "GET",
-        url: "https://cors-anywhere.herokuapp.com/http://localhost:8080/users/_count_",
+        url: "http://localhost:8080/users/_count_",
         success: function (res) {
           $("#result_cnt").empty();
           $("#result_cnt").append("<p>users number : " + res + "</p>");
@@ -52,7 +52,7 @@
       }
       $.ajax({
         type: "PUT",
-        url: "localhost:8080/users/?uid=" + params["id"] + "&passwd=" + params["passwd"],
+        url: "http://localhost:8080/users/?uid=" + params["id"] + "&passwd=" + params["passwd"],
         success: function (res) {
           $("#result_add").empty();
           $("#result_add").append("<p>user id = " + params["id"]
@@ -84,15 +84,16 @@
         id: $("#uid_delete").val()
       }
       $.ajax({
-        type: "PUT",
-        url: "localhost:8080/users/?uid=" + params["id"],
+        type: "DELETE",
+        url: "http://localhost:8080/users/" + params["id"],
         success: function (res) {
-          $("result_delete").empty();
-          $("result_delete").append("<p>user id = " + params["id"]);
+          $("#result_delete").empty();
+          $("#result_delete").append("<p>user id = " + params["id"]);
           if (res["result"] == "SUCCESS") {
             $("#result_delete").append("</p><p>result = SUCCESS</p>");
           }
           else {
+            $("#result_delete").empty();
             $("#result_delete").append("</p><p>result = FAILED</p>");
           }
         },
@@ -117,10 +118,13 @@
       }
       $.ajax({
         type: "GET",
-        url: "localhost:8080/users/" + params["id"] + "/ratings",
+        url: "http://localhost:8080/users/" + params["id"] + "/ratings",
         success: function (res) {
           $("#result_ratinglist").empty();
           $("#result_ratinglist").append("<div><p>user id : " + params["id"] + "</p>");
+          if (res == "") {
+            $("#result_ratinglist").append("<p>nothing</p>");
+          }
           for (rating of res) {
             $("#result_ratinglist").append("<p>movie id : " + rating["movieId"] + "</p>"
               + "<p>rating : " + rating["rating"] + "</p></div>");
@@ -151,7 +155,7 @@
       }
       $.ajax({
         type: "PUT",
-        url: "localhost:8080/users/" + params["uid"] + "/ratings?movie=" + params["movieid"]
+        url: "http://localhost:8080/users/" + params["uid"] + "/ratings?movie=" + params["movieid"]
           + "&rating=" + params["score"],
         success: function (res) {
           $("#result_rating").empty();
@@ -162,6 +166,7 @@
             + "<p>score : " + params["score"] + "</p></div>");
           }
           else {
+            $("#result_rating").empty();
             $("#result_rating").append("<p>result : FAIL</p>");
           }
         },
@@ -182,7 +187,7 @@
     $("#request_userlist").click(function () {
       $.ajax({
         type: "GET",
-        url: "localhost:8080/users/",
+        url: "http://localhost:8080/users",
         success: function (res) {
           $("#result_userlist").empty();
           for (user of res) {
