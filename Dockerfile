@@ -13,6 +13,12 @@ RUN echo "${SSH_PRIVATE_KEY}" >> ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 RUN touch ~/.ssh/known_hosts
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
+RUN mkdir test/
+
 WORKDIR /root
 
 RUN git clone -b ver.db --single-branch git@github.com:SoftwareEngineering-Gotcha/MovieRecommendation.git
+
+WORKDIR /root/MovieRecommendation
+
+ENTRYPOINT [ "mvn", "spring-boot:run"]
