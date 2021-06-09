@@ -24,7 +24,7 @@
     $("#request_cnt").click(function () {
       $.ajax({
         type: "GET",
-        url: "localhost:8080/users/_count_",
+        url: "https://cors-anywhere.herokuapp.com/http://localhost:8080/users/_count_",
         success: function (res) {
           $("#result_cnt").empty();
           $("#result_cnt").append("<p>users number : " + res + "</p>");
