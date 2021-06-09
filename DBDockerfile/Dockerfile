@@ -13,15 +13,18 @@ RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 WORKDIR /root
 
-RUN git clone git@github.com:SoftwareEngineering-Gotcha/MovieRecommendation.git
+RUN git clone -b ver.db --single-branch git@github.com:SoftwareEngineering-Gotcha/MovieRecommendation.git
 
 WORKDIR /root/MovieRecommendation/sql
 RUN cp movies.sql /docker-entrypoint-initdb.d/
 RUN cp ratings.sql /docker-entrypoint-initdb.d/
 RUN cp user.sql /docker-entrypoint-initdb.d/
+RUN cp mgs.sql /docker-entrypoint-initdb.d/
+
 RUN cp init_movies_seq.sql /docker-entrypoint-initdb.d/
 RUN cp init_users_seq.sql /docker-entrypoint-initdb.d/
 RUN cp init_ratings_seq.sql /docker-entrypoint-initdb.d/
+RUN cp init_mgs_seq.sql /docker-entrypoint-initdb.d/
 
 WORKDIR /root
 RUN rm -r MovieRecommendation
