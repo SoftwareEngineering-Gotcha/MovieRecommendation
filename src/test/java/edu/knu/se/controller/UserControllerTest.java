@@ -1,4 +1,4 @@
-package edu.knu.se;
+package edu.knu.se.controller;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +12,7 @@ import edu.knu.se.service.UserService;
 import org.junit.*;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
@@ -31,9 +32,10 @@ import javax.swing.*;
 
 @RunWith(SpringRunner.class)
 
-@SpringBootTest()
+@SpringBootTest
 @Transactional
 public class UserControllerTest {
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -46,30 +48,25 @@ public class UserControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+
+    Integer temp_count;
+
     @Before()
     public void Setup(){
         User temp1 = new User();
-        temp1.setUserid("test1");
-        temp1.setPasswd("passtest1");
-        temp1.setId(new Long(1));
         User temp2 = new User();
+        temp_count = usr.count();
+        temp1.setUserid("test");
+        temp1.setPasswd("test");
+        userRepository.save(temp1);
         temp2.setUserid("test2");
-        temp2.setPasswd("passtest2");
-        temp2.setId(new Long(2));
-        User temp3 = new User();
-        temp3.setUserid("test3");
-        temp3.setPasswd("passtest3");
-        temp3.setId(new Long(3));
-        User temp4 = new User();
-        temp4.setUserid("test4");
-        temp4.setPasswd("passtest4");
-        temp4.setId(new Long(4));
+        temp2.setPasswd("test2");
+        userRepository.save(temp2);
     }
 
     @Test
     public void count_test(){
-
-        assertEquals(4,usr.count());
+        assertEquals(temp_count + 2,usr.count());
     }
 
 }
