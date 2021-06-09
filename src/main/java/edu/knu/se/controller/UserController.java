@@ -45,6 +45,22 @@ public class UserController {
         return list.size();
     }
 
+
+    @PutMapping("/")
+    String putUser(@RequestParam(name = "uid") String uid, @RequestParam(name="passwd") String pwd) {
+        String result = "FAILED";
+
+        if(!(userService.ExistsOnebyUserid(uid))) {
+            User newUser = new User();
+            newUser.setUserid(uid);
+            newUser.setPasswd(pwd);
+            userService.join(newUser);
+            result = "SUCCESS";
+        }
+
+        return "{\"result\":"+result+"\"}";
+    }
+
     @GetMapping("/{userid}/ratings")
     List<Ratings> return_rating(@PathVariable(name = "userid") String userid)
     {
