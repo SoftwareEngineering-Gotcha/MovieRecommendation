@@ -35,12 +35,12 @@ public class UserController {
     }
 
     @GetMapping("")
-    List<User> all(){
+    public List<User> all(){
         return userService.findMember();
     }
 
     @GetMapping("/_count_")
-    int count(){
+    public int count(){
         List<User> list = userService.findMember();
         return list.size();
     }

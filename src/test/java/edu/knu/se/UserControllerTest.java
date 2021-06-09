@@ -35,7 +35,35 @@ public class UserControllerTest {
     @Autowired
     UserController usr = new UserController(userService, movieService, ratingsService);
 
-    @
+    @Before
+    void init(){
+        User temp = new User();
+        temp.setUserid("Test1");
+        temp.setPasswd("1111");
+        userService.join(temp);
+        temp.setUserid("Test2");
+        temp.setPasswd("1111");
+        userService.join(temp);
+        temp.setUserid("Test3");
+        temp.setPasswd("1111");
+        userService.join(temp);
+        temp.setUserid("Test4");
+        temp.setPasswd("1111");
+        userService.join(temp);
+
+    }
+
+    @Test
+    void count_test(){
+        assertEquals(4,usr.count());
+    }
+
+    @Test
+    void all_test(){
+        boolean result = false;
+        
+        assertTrue();
+    }
 
 
 }
