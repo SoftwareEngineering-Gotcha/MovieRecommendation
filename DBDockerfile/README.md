@@ -2,4 +2,4 @@
 
 1. docker-compose up 으로 실행
 
-2. docker exec -it movierecommendation_db_1 /bin/bash init.bash
+2. docker exec -it movierecommendation_db_1 /bin/bash init.bash 로 초기화
