@@ -21,4 +21,4 @@ services:
             args:
                 - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
         ports:
-            - "12000:22"
+            - "8080:8080"

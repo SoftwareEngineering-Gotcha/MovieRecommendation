@@ -1,0 +1,56 @@
+--------------------------------------------------------
+--  ������ ������ - ȭ����-6��-08-2021   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table MGS
+--------------------------------------------------------
+
+  CREATE TABLE "SYS"."MGS" 
+   (	"ID" NUMBER, 
+	"USERID" VARCHAR(255),
+	"ACTION" FLOAT(126), 
+	"ANIMATION" FLOAT(126), 
+	"ADVENTURE" FLOAT(126), 
+	"CHILDREN" FLOAT(126), 
+	"COMEDY" FLOAT(126), 
+	"CRIME" FLOAT(126), 
+	"DOCUMENTARY" FLOAT(126), 
+	"DRAMA" FLOAT(126), 
+	"FANTASY" FLOAT(126), 
+	"FILM_NOIR" FLOAT(126), 
+	"HORROR" FLOAT(126), 
+	"MUSICAL" FLOAT(126), 
+	"MYSTERY" FLOAT(126), 
+	"ROMANCE" FLOAT(126), 
+	"SCIFI" FLOAT(126), 
+	"THRILLER" FLOAT(126), 
+	"WAR" FLOAT(126), 
+	"WESTERN" FLOAT(126)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT)
+  TABLESPACE "SYSTEM" ;
+REM INSERTING into SYS.MGS
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index PK_MGS
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS"."PK_MGS" ON "SYS"."MGS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  Constraints for Table MGS
+--------------------------------------------------------
+
+  ALTER TABLE "SYS"."MGS" ADD CONSTRAINT "PK_MGS" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
