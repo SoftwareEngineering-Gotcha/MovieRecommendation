@@ -27,7 +27,7 @@ public class UserController {
 
     List<String> data;
     @Autowired
-    UserController(UserService userService, MovieService movieService, RatingsService ratingsService){
+    public UserController(UserService userService, MovieService movieService, RatingsService ratingsService){
         this.userService = userService;
         this.movieService = movieService;
         this.ratingsService = ratingsService;

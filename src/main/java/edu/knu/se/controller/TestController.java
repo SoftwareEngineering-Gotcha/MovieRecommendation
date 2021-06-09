@@ -22,14 +22,14 @@ public class TestController {
     }
 
     @GetMapping("/{userid}")
-    String return_mgs(@PathVariable("userid") Long userid){
+    String return_mgs(@PathVariable("userid") String userid){
         mgs.getscorebyrating(userid);
 
         return "SUCCESS";
     }
 
     @GetMapping("/{userid}/movie_list")
-    List<Movie> return_list(@PathVariable("userid") Long userid){
+    List<Movie> return_list(@PathVariable("userid") String userid){
         mgs.getscorebyrating(userid);
         return mgs.getRecommendedMovieList(userid);
     }

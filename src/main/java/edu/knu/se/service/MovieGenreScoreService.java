@@ -21,13 +21,13 @@ public class MovieGenreScoreService {
         this.movieService = movieService;
     }
 
-    public long save(MovieGenreScore mgs){
+    public String save(MovieGenreScore mgs){
 
         mgsrepository.save(mgs);
         return mgs.getUserid();
     }
 
-    public MovieGenreScore getscorebyrating(Long userid){
+    public MovieGenreScore getscorebyrating(String userid){
         List<Ratings> list = ratingsService.findByUserid(userid);
         MovieGenreScore mgs = new MovieGenreScore();
         for(int i = 0; i < list.size(); i++)
@@ -372,7 +372,7 @@ public class MovieGenreScoreService {
         return mgs;
     }
 
-    public List<Movie> getRecommendedMovieList(Long userid) {
+    public List<Movie> getRecommendedMovieList(String userid) {
         MovieGenreScore mgs = mgsrepository.findByUserid(userid).get();
         HashMap<Movie, Float> hm = new HashMap<Movie, Float>();
         List<Movie> list = new ArrayList<Movie>(30);
