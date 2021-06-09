@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEAM GOTCHA --- KNU 2021SS software engineering</title>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <style type="text/css">
+    div {
+      margin: 20px 0px
+    }
+  </style>
+</head>
+<body>
+  <h1>TEAM GOTCHA --- REST API test page</h1>
+  <div>
+    <h3>user counts</h3>
+    <input type="button" id="request_cnt" value="get users number">
+    <div id="result_cnt"></div>
+  </div>
+  <script>
+    $("#request_cnt").click(function () {
+      $.ajax({
+        type: "GET",
+        url: "localhost:8080/users/_count_",
+        success: function (res) {
+          $("#result_cnt").empty();
+          $("#result_cnt").append("<p>users number : " + res + "</p>");
+        },
+        error: function (req, stat, err) {
+          $("#result_cnt").empty();
+          $("#result_cnt").append("<p>[error] : " + err + "</p>");
+        }
+      });
+    })
+  </script>
+  <hr>
+  <div>
+    <h3>add user</h3>
+    <input type="text" id="uid_add" placeholder="user id">
+    <input type="text" id="passwd_add" placeholder="user password">
+    <input type="button" id="request_add" value="add user">
+    <div id="result_add"></div>
+  </div>
+  <script>
+    $("#request_add").click(function () {
+      var params = {
+        id: $("#uid_add").val(),
+        passwd: $("#passwd_add").val()
+      }
+      $.ajax({
+        type: "PUT",
+        url: "localhost:8080/users/?uid=" + params["id"] + "&passwd=" + params["passwd"],
+        success: function (res) {
+          $("#result_add").empty();
+          $("#result_add").append("<p>user id = " + params["id"]
+            + "</p><p>passwd = " + params["passwd"]);
+          if (res["result"] == "SUCCESS") {
+            $("#result_add").append("</p><p>result = SUCCESS</p>");
+          }
+          else {
+            $("#result_add").append("</p><p>result = FAILED</p>");
+          }
+        },
+        error: function (req, stat, err) {
+          $("#result_add").empty();
+          $("#result_add").append("[error] : " + err);
+        }
+      });
+    })
+  </script>
+  <hr>
+  <div>
+    <h3>delete user</h3>
+    <input type="text" id="uid_delete" placeholder="user id">
+    <input type="button" id="request_delete" value="delete user">
+    <div id="result_delete"></div>
+  </div>
+  <script>
+    $("#request_delete").click(function () {
+      var params = {
+        id: $("#uid_delete").val()
+      }
+      $.ajax({
+        type: "PUT",
+        url: "localhost:8080/users/?uid=" + params["id"],
+        success: function (res) {
+          $("result_delete").empty();
+          $("result_delete").append("<p>user id = " + params["id"]);
+          if (res["result"] == "SUCCESS") {
+            $("#result_delete").append("</p><p>result = SUCCESS</p>");
+          }
+          else {
+            $("#result_delete").append("</p><p>result = FAILED</p>");
+          }
+        },
+        error: function (req, stat, err) {
+          $("#result_delete").empty();
+          $("#result_delete").append("[error] : " + err);
+        }
+      });
+    })
+  </script>
+  <hr>
+  <div>
+    <h3>get user's rating list</h3>
+    <input type="text" id="uid_ratinglist" placeholder="user id">
+    <input type="button" id="request_ratinglist" value="get user's rating list">
+    <div id="result_ratinglist"></div>
+  </div>
+  <script>
+    $("#request_ratinglist").click(function () {
+      var params = {
+        id: $("#uid_ratinglist").val()
+      }
+      $.ajax({
+        type: "GET",
+        url: "localhost:8080/users/" + params["id"] + "/ratings",
+        success: function (res) {
+          $("#result_ratinglist").empty();
+          $("#result_ratinglist").append("<div><p>user id : " + params["id"] + "</p>");
+          for (rating of res) {
+            $("#result_ratinglist").append("<p>movie id : " + rating["movieId"] + "</p>"
+              + "<p>rating : " + rating["rating"] + "</p></div>");
+          }
+        },
+        error: function (req, stat, err) {
+          $("#result_ratinglist").empty();
+          $("#result_ratinglist").append("<p>[error] : " + err + "</p>");
+        }
+      });
+    })
+  </script>
+  <hr>
+  <div>
+    <h3>add movie rating</h3>
+    <input type="text" id="uid_rating" placeholder="user id">
+    <input type="text" id="movieid_rating" placeholder="movie id">
+    <input type="text" id="score_rating" placeholder="score">
+    <input type="button" id="request_rating" value="add movie rating">
+    <div id="result_rating"></div>
+  </div>
+  <script>
+    $("#request_rating").click(function () {
+      var params = {
+        uid: $("#uid_rating").val(),
+        movieid: $("#movieid_rating").val(),
+        score: $("#score_rating").val()
+      }
+      $.ajax({
+        type: "PUT",
+        url: "localhost:8080/users/" + params["uid"] + "/ratings?movie=" + params["movieid"]
+          + "&rating=" + params["score"],
+        success: function (res) {
+          $("#result_rating").empty();
+          if (res["result"] == "SUCCESS"){
+          $("#result_rating").append("<div><p>result : SUCCESS</p>"
+            + "<p>user id : " + params["uid"] + "</p>"
+            + "<p>movie id : " + params["movieid"] + "</p>"
+            + "<p>score : " + params["score"] + "</p></div>");
+          }
+          else {
+            $("#result_rating").append("<p>result : FAIL</p>");
+          }
+        },
+        error: function (req, stat, err) {
+          $("#result_rating").empty();
+          $("#result_rating").append("<p>[error] : " + err + "</p>");
+        }
+      });
+    })
+  </script>
+  <hr>
+  <div>
+    <h3>get all user list</h3>
+    <input type="button" id="request_userlist" value="get user list">
+    <div id="result_userlist"></div>
+  </div>
+  <script>
+    $("#request_userlist").click(function () {
+      $.ajax({
+        type: "GET",
+        url: "localhost:8080/users/",
+        success: function (res) {
+          $("#result_userlist").empty();
+          for (user of res) {
+            $("#result_userlist").append("<div><p>user id : " + user["userId"] + "</p>");
+            $("#result_userlist").append("<p>user passwd : " + user["passwd"] + "</p></div>");
+          }
+        },
+        error: function (req, stat, err) {
+          $("#result_userlist").empty();
+          $("#result_userlist").append("<p>[error] : " + err + "</p>");
+        }
+      });
+    })
+  </script>
+</body>
+
+</html>
