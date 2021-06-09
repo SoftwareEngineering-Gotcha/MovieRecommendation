@@ -11,7 +11,7 @@ public interface RatingsRepository {
 
     @Query(value = "select * from ratings where userid = ?1",nativeQuery=true)
     public List<Ratings> findByUserid(
-            Long userid
+            String userid
     );
 
     @Query(value = "select * from ratings "
@@ -19,7 +19,7 @@ public interface RatingsRepository {
             +"movieid= ?2 and"
             +"rating= ?3", nativeQuery = true
     )
-    public boolean isexists( Long userid,
+    public boolean isexists( String userid,
                       Long movieid,
                       Float rating
     );
@@ -29,13 +29,13 @@ public interface RatingsRepository {
             +"movieid= ?2 and"
             +"rating= ?3", nativeQuery = true
     )
-    public Optional<Ratings> findByAll(Long userid,
+    public Optional<Ratings> findByAll(String userid,
                                  Long movieid,
                                  Float rating
     );
 
     @Query(value = "select * from ratings where userid = ?1 and movieid= ?2",nativeQuery = true)
-    public Ratings findByUseridandMovieid(Long userid, Long movieid);
+    public Ratings findByUseridandMovieid(String userid, Long movieid);
 
     /*
     @Query("from ratings "

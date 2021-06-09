@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @GetMapping("/{userid}/ratings")
-    List<Ratings> return_rating(@PathVariable(name = "userid") Long userid)
+    List<Ratings> return_rating(@PathVariable(name = "userid") String userid)
     {
         if(userService.ExistsOnebyUserid(userid))
         {
@@ -83,7 +83,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userid}")
-    String deleteUid(@PathVariable(name = "userid") Long uid) {
+    String deleteUid(@PathVariable(name = "userid") String uid) {
         String result = "FAILED";
         if((userService.ExistsOnebyUserid(uid))) {
             userService.deleteByUserid(uid);
@@ -94,7 +94,7 @@ public class UserController {
 
     //R6
     @PutMapping("/{uid}/ratings")
-    String putRating(@PathVariable("uid")Long uid,@RequestParam("movie") Long movie_id, @RequestParam("rating") float rating) {
+    String putRating(@PathVariable("uid")String uid,@RequestParam("movie") Long movie_id, @RequestParam("rating") float rating) {
         String result = "FAILED";
         Ratings temp = new Ratings();
 

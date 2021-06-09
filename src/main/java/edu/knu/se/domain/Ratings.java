@@ -19,7 +19,7 @@ public class Ratings {
     private Long id;
 
     @Column
-    private Long userid;
+    private String userid;
 
     @Column
     private Long movieid;
@@ -33,7 +33,7 @@ public class Ratings {
     public Ratings() {
     }
 
-    public void setUserid(Long userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
 
@@ -49,7 +49,7 @@ public class Ratings {
         this.timestamp = timestamp;
     }
 
-    public Long getUserid() {
+    public String getUserid() {
         return userid;
     }
 

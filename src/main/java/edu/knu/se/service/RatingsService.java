@@ -16,7 +16,7 @@ public class RatingsService {
         this.ratingsRepository = ratingsRepository;
     }
 
-    public long join(Ratings ratings){
+    public String join(Ratings ratings){
        // validateDuplicateRatings(ratings);
 
         ratingsRepository.save(ratings);
@@ -31,7 +31,7 @@ public class RatingsService {
 
     }
 
-    public Ratings findByUseridandMovieid(Long userid, Long movieid)
+    public Ratings findByUseridandMovieid(String userid, Long movieid)
     {
         return ratingsRepository.findByUseridandMovieid(userid,movieid);
     }
@@ -40,7 +40,7 @@ public class RatingsService {
         ratingsRepository.deleteByUserid(Userid);
     }
 */
-    public List<Ratings> findByUserid(Long userid){return ratingsRepository.findByUserid(userid);}
+    public List<Ratings> findByUserid(String userid){return ratingsRepository.findByUserid(userid);}
     public List<Ratings> findAll() {
         return ratingsRepository.findAll();
     }

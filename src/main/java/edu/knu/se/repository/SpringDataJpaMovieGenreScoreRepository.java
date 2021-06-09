@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface SpringDataJpaMovieGenreScoreRepository extends JpaRepository<MovieGenreScore, Long>, MovieGenreScoreRepository {
     @Override
-    Optional<MovieGenreScore> findByUserid(Long userid);
+    Optional<MovieGenreScore> findByUserid(String userid);
     @Override
-    boolean existsByUserid(Long userid);
+    boolean existsByUserid(String userid);
     @Override
-    void deleteByUserid(Long Userid);
+    void deleteByUserid(String Userid);
 }

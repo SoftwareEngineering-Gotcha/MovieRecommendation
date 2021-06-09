@@ -17,7 +17,7 @@ public class MovieGenreScore {
 
 
 	@Column
-	private Long Userid;
+	private String Userid;
 
 	private Float Action;
 	private Float Animation;
@@ -53,7 +53,7 @@ public class MovieGenreScore {
 		Id = id;
 	}
 
-	public void setUserid(Long userid) {
+	public void setUserid(String userid) {
 		Userid = userid;
 	}
 
@@ -129,7 +129,7 @@ public class MovieGenreScore {
 		return Id;
 	}
 
-	public Long getUserid() {
+	public String getUserid() {
 		return Userid;
 	}
 

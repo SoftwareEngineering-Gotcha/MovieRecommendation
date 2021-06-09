@@ -26,24 +26,24 @@ public class User {
         return id;
     }
 
-    private Long userid;
+    private String userid;
 
     private String passwd;
 
     public User() {}
 
-    public User(Long uid, String passwd, ArrayList<Integer> genreScore, ArrayList<Integer> movieList){
+    public User(String uid, String passwd, ArrayList<Integer> genreScore, ArrayList<Integer> movieList){
         this.userid = uid;
         this.passwd = passwd;
 
     }
 
 
-    public Long getUserid(){
+    public String getUserid(){
         return this.userid;
     }
 
-    public void setUserid(Long uid){
+    public void setUserid(String uid){
         this.userid = uid;
     }
 

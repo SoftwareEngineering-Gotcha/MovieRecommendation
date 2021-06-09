@@ -25,7 +25,7 @@ public class UserService {
     }
 
     private void validateDuplicateMember(User user){
-        userRepository.findByUserid(user.getId())
+        userRepository.findByUserid(user.getUserid())
                 .ifPresent(m->{
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
@@ -33,9 +33,9 @@ public class UserService {
 
     public List<User> findMember(){return userRepository.findAll();}
 
-    public Optional<User> findOne(Long memberId) { return userRepository.findByUserid(memberId);}
-    public boolean ExistsOnebyUserid(Long memberId) {return userRepository.existsByUserid(memberId);}
-    public void deleteByUserid(Long Id){ userRepository.deleteByUserid(Id);}
+    public Optional<User> findOne(String memberId) { return userRepository.findByUserid(memberId);}
+    public boolean ExistsOnebyUserid(String memberId) {return userRepository.existsByUserid(memberId);}
+    public void deleteByUserid(String Id){ userRepository.deleteByUserid(Id);}
 }
 
 

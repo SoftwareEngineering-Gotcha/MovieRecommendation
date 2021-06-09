@@ -26,12 +26,12 @@ public class RatingsController {
     }
 
     @GetMapping("/")
-    List<Ratings> return_ratings(@RequestParam Long userid) {
+    List<Ratings> return_ratings(@RequestParam String userid) {
         return ratingsService.findByUserid(userid);
     }
 
     @PutMapping("/")
-    String putRatings(@RequestParam(name = "userid") Long uid, @RequestParam(name = "movieid")
+    String putRatings(@RequestParam(name = "userid") String uid, @RequestParam(name = "movieid")
                       Long mid,@RequestParam(name="rating")Float rating)
     {
         String result = "SUCCESS";
@@ -47,11 +47,11 @@ public class RatingsController {
     }
 
     @GetMapping("/exists/")
-    String isit(@RequestParam(name = "userid") Long uid, @RequestParam(name = "movieid") Long movieid)
+    String isit(@RequestParam(name = "userid") String uid, @RequestParam(name = "movieid") Long movieid)
     {
         Ratings ratings = ratingsService.findByUseridandMovieid(uid,movieid);
 
-        String str1 = new String("userid : " + Long.toString(ratings.getUserid())+" movieid : " + Long.toString(ratings.getMovieid()));
+        String str1 = new String("userid : " + ratings.getUserid()+" movieid : " + Long.toString(ratings.getMovieid()));
 
         return str1;
     }

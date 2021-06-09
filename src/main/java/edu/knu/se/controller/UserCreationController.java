@@ -25,7 +25,7 @@ public class UserCreationController {
 
     }
     @PutMapping("/{userid}/")
-    String putUser(@PathVariable(name = "userid") Long uid, @RequestParam(name="passwd") String pwd) {
+    String putUser(@PathVariable(name = "userid") String uid, @RequestParam(name="passwd") String pwd) {
         String result = "FAILED";
 
         if(!(userService.ExistsOnebyUserid(uid))) {

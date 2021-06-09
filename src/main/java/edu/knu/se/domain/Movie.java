@@ -9,7 +9,7 @@ import javax.persistence.*;
         initialValue = 1,
         allocationSize = 1
 )
-@Table(name = "movie")
+@Table(name = "movies")
 public class Movie {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FOR_MOVIE_SEQ")
     private Long movieid;
