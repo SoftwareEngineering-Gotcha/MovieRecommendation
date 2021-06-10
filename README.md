@@ -10,3 +10,6 @@
 <p> 4. docker exec -it movierecommendation_db_1 /bin/bash init.bash을 입력하여
 <p> db servive의 초기화를 위해 사용한 sql 파일을 자동으로 삭제합니다.
 <p> 5. 이제 평가해주시면 됩니다.
+
+ ## FrontEnd 접속방법
+  - docker-compose up을 통한 서버 실행 밑 DB 구동 후 http://localhost:8080/ 접속
