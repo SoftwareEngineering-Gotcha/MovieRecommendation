@@ -14,4 +14,7 @@
  ## FrontEnd 접속방법
   - docker-compose up을 통한 서버 실행 및 DB 구동 후 http://localhost:8080/ 접속
  ## Test 하는 방법
-  - docker-compose up을 해서 DB Service가 동작하고 있을 때 Test 실시
+<p> 1. DBDockerfile에 있는 Dockerfile로 build image
+<p> 2. docker run -d -p 49161:1521 (build한 image 이름) 으로 DB Docker Container를 run
+<p> 3. DB 초기화가 다 끝날 때 까지 대기
+<p> 4. DB 초기화가 끝난 후 Test 시작
