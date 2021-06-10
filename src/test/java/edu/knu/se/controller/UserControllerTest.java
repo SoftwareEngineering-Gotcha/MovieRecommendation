@@ -27,6 +27,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.json.simple.JSONObject;
 
 import javax.swing.*;
 import java.util.List;
@@ -73,15 +74,17 @@ public class UserControllerTest {
 
     @Test
     public void deleteTest(){
+        JSONObject result = usr.deleteUid("test");
         temp_count--;
-        assertEquals("{\"result\":\"SUCCESS\"}",usr.deleteUid("test"));
+        assertEquals("{\"result\":\"SUCCESS\"}",result.toJSONString());
 
     }
 
     @Test //R2
     public void put_user_test(){
+        JSONObject result = usr.putUser("test3", "testpwd");
         temp_count++;
-        assertEquals("{\"result\":SUCCESS\"}", usr.putUser("test3", "testpwd"));
+        assertEquals("{\"result\":\"SUCCESS\"}", result.toJSONString());
     }
 
     @Test // R4
@@ -92,7 +95,8 @@ public class UserControllerTest {
 
     @Test
     public void r6_test(){
-        assertEquals("{\"result\":SUCCESS\"}", usr.putRating("test", new Long(1),new Float(1.0)));
+        JSONObject result = usr.putRating("test", new Long(1),new Float(1.0));
+        assertEquals("{\"result\":\"SUCCESS\"}", result.toJSONString());
 
     }
 

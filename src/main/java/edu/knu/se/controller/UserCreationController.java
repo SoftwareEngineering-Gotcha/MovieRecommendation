@@ -4,6 +4,7 @@ import edu.knu.se.domain.User;
 import edu.knu.se.service.MovieService;
 import edu.knu.se.service.RatingsService;
 import edu.knu.se.service.UserService;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class UserCreationController {
 
     }
     @PutMapping("/{userid}/")
-    String putUser(@PathVariable(name = "userid") String uid, @RequestParam(name="passwd") String pwd) {
+    public JSONObject putuser(@PathVariable(name = "userid") String uid, @RequestParam(name="passwd") String pwd) {
         String result = "FAILED";
 
         if(!(userService.ExistsOnebyUserid(uid))) {
@@ -36,7 +37,9 @@ public class UserCreationController {
             result = "SUCCESS";
         }
 
-        return "{\"result\":"+result+"\"}";
+        JSONObject output = new JSONObject();
+        output.put("result", result);
+        return output;
     }
 
 }

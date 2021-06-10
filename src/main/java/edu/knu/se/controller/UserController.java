@@ -1,6 +1,7 @@
 package edu.knu.se.controller;
 import java.io.*;
 
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import edu.knu.se.domain.Movie;
 import edu.knu.se.domain.Ratings;
 import edu.knu.se.domain.User;
@@ -9,10 +10,10 @@ import edu.knu.se.repository.UserRepository;
 import edu.knu.se.service.MovieService;
 import edu.knu.se.service.RatingsService;
 import edu.knu.se.service.UserService;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -37,7 +38,7 @@ public class UserController {
     // R2
     @CrossOrigin(origins = "http://localhost:8080")
     @PutMapping("")
-    String putUser(@RequestParam(name = "uid") String uid, @RequestParam(name="passwd") String pwd) {
+    public JSONObject putUser(@RequestParam(name = "uid") String uid, @RequestParam(name="passwd") String pwd) {
         String result = "FAILED";
 
         if(!(userService.ExistsOnebyUserid(uid))) {
@@ -48,19 +49,24 @@ public class UserController {
             result = "SUCCESS";
         }
 
-        return "{\"result\":\"" + result + "\"}";
+        JSONObject output = new JSONObject();
+        output.put("result", result);
+        return output;
     }
 
     // R3
     @CrossOrigin(origins = "http://localhost:8080")
     @DeleteMapping("/{userid}")
-    public String deleteUid(@PathVariable(name = "userid") String uid) {
+    public JSONObject deleteUid(@PathVariable(name = "userid") String uid) {
         String result = "FAILED";
         if((userService.ExistsOnebyUserid(uid))) {
             userService.deleteByUserid(uid);
             result = "SUCCESS";
         }
-        return "{\"result\":\"" + result + "\"}";
+
+        JSONObject output = new JSONObject();
+        output.put("result", result);
+        return output;
     }
 
     // R4
@@ -81,20 +87,34 @@ public class UserController {
     //R6
     @CrossOrigin(origins = "http://localhost:8080")
     @PutMapping("/{uid}/ratings")
-    String putRating(@PathVariable("uid")String uid,@RequestParam("movie") Long movie_id, @RequestParam("rating") float rating) {
+    public JSONObject putRating(@PathVariable("uid")String uid,@RequestParam("movie") Long movie_id, @RequestParam("rating") float rating) {
         String result = "FAILED";
         Ratings temp = new Ratings();
 
         List<Ratings> list = ratingsService.findByUserid(uid); // uid를 바탕으로 해당 uid가 평가한 ratings들을 불러옴
 
-        if(!(userService.ExistsOnebyUserid(uid))) // 없는 User이면
-            return "{\"result\":\"" + result + "\"}"; // 실패 반환
+        if(!(userService.ExistsOnebyUserid(uid))) { // 없는 User이면
+            JSONObject output = new JSONObject();
+            output.put("result", result);
+            return output; // 실패 반환
+        }
+        
+        if(!(movieService.ExistsById(movie_id))) {// 없는 movie이면
+            JSONObject output = new JSONObject();
+            output.put("result", result);
+            return output; // 실패 반환
+        }
 
-        if(!(movieService.ExistsById(movie_id))) // 없는 movie이면
-            return "{\"result\":\"" + result + "\"}"; // 실패 반환
-
-        if(!(rating >= 1 && rating <= 5)) return "{\"result\":\"" + result + "\"}"; // 1 미만 5 초과
-        if((rating%0.5) != 0.0) return "{\"result\":\"" + result + "\"}"; // n.0 또는 n.5가 아님
+        if(!(rating >= 1 && rating <= 5)) { // 1 미만 5 초과
+            JSONObject output = new JSONObject();
+            output.put("result", result);
+            return output; // 실패 반환
+        }
+        if((rating%0.5) != 0.0) { // n.0 또는 n.5가 아님
+            JSONObject output = new JSONObject();
+            output.put("result", result);
+            return output; // 실패 반환
+        }
 
 
 
@@ -107,7 +127,9 @@ public class UserController {
                 temp.setTimestamp(timestamp / 1000); // timestamp 설정
                 result = "SUCCESS"; // 성공
                 ratingsService.join(temp); // DB에 저장
-                return "{\"result\":\"" + result + "\"}";
+                JSONObject output = new JSONObject();
+                output.put("result", result);
+                return output;
             }
         }
 
@@ -120,13 +142,15 @@ public class UserController {
         result = "SUCCESS"; // 성공
         ratingsService.join(temp); // DB에 저장
 
-        return "{\"result\":\"" + result + "\"}";
+        JSONObject output = new JSONObject();
+        output.put("result", result);
+        return output;
     }
 
     // R7
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/{userid}/ratings")
-    List<Ratings> return_rating(@PathVariable(name = "userid") String userid) {
+    public List<Ratings> return_rating(@PathVariable(name = "userid") String userid) {
         if(userService.ExistsOnebyUserid(userid))
         {
             List<Ratings> list = ratingsService.findByUserid(userid);
