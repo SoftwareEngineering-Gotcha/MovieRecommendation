@@ -13,3 +13,5 @@
 
  ## FrontEnd 접속방법
   - docker-compose up을 통한 서버 실행 및 DB 구동 후 http://localhost:8080/ 접속
+ ## Test 하는 방법
+  - docker-compose up을 해서 DB Service가 동작하고 있을 때 Test 실시
