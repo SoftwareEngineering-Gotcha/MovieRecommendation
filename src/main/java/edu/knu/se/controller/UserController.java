@@ -34,22 +34,9 @@ public class UserController {
 
     }
 
-    @GetMapping("")
-    public List<User> all(){
-        return userService.findMember();
-    }
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/_count_")
-    public int count(){
-        List<User> list = userService.findMember();
-        return list.size();
-    }
-
-
-    @CrossOrigin(origins = "http://localhost:8080")
+    // R2
     @PutMapping("")
-    public String putUser(@RequestParam(name = "uid") String uid, @RequestParam(name="passwd") String pwd) {
+    String putUser(@RequestParam(name = "uid") String uid, @RequestParam(name="passwd") String pwd) {
         String result = "FAILED";
 
         if(!(userService.ExistsOnebyUserid(uid))) {
@@ -62,44 +49,8 @@ public class UserController {
 
         return "{\"result\":"+result+"\"}";
     }
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/{userid}/ratings")
-    public List<Ratings> return_rating(@PathVariable(name = "userid") String userid)
-    {
-        if(userService.ExistsOnebyUserid(userid))
-        {
-            List<Ratings> list = ratingsService.findByUserid(userid);
-            return list;
-        }
 
-        return null;
-
-    }
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/")
-    public List<String> return_movie(@RequestParam Long uid){
-    
-        try {
-            File csv = new File("ratings.csv");
-            data = new ArrayList<String>();
-            BufferedReader br = new BufferedReader(new FileReader(csv));
-            String line = "";
-
-            while ((line = br.readLine()) != null){
-                String[] token = line.split(",", -1);
-                if(token[0].equals(Long.toString(uid)))
-                {
-                    data.add(token[1]);
-                }
-            }
-        } catch(FileNotFoundException e){
-            e.printStackTrace();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
-        return data;
-    }
-    @CrossOrigin(origins = "http://localhost:8080")
+    // R3
     @DeleteMapping("/{userid}")
     public String deleteUid(@PathVariable(name = "userid") String uid) {
         String result = "FAILED";
@@ -110,28 +61,36 @@ public class UserController {
         return "{\"result\":\"" + result + "\"}";
     }
 
+    // R4
+    @GetMapping("")
+    public List<User> all(){
+        return userService.findMember();
+    }
+
+    // R5
+    @GetMapping("/_count_")
+    public int count(){
+        List<User> list = userService.findMember();
+        return list.size();
+    }
+
     //R6
-    @CrossOrigin(origins = "http://localhost:8080")
     @PutMapping("/{uid}/ratings")
-    public String putRating(@PathVariable("uid")String uid,@RequestParam("movie") Long movie_id, @RequestParam("rating") float rating) {
+    String putRating(@PathVariable("uid")String uid,@RequestParam("movie") Long movie_id, @RequestParam("rating") float rating) {
         String result = "FAILED";
         Ratings temp = new Ratings();
 
         List<Ratings> list = ratingsService.findByUserid(uid); // uid를 바탕으로 해당 uid가 평가한 ratings들을 불러옴
-        System.out.println("통과1");
+
         if(!(userService.ExistsOnebyUserid(uid))) // 없는 User이면
             return "{\"result\":"+ result +"\"}"; // 실패 반환
-        System.out.println("통과2");
-        System.out.println(movieService.ExistsById(movie_id));
-        /*
+
         if(!(movieService.ExistsById(movie_id))) // 없는 movie이면
             return "{\"result\":"+ result +"\"}"; // 실패 반환
 
-         */
-        System.out.println("통과3");
         if(!(rating >= 1 && rating <= 5)) return "{\"result\":"+result+"\"}"; // 1 미만 5 초과
         if((rating%0.5) != 0.0) return "{\"result\":"+result+"\"}"; // n.0 또는 n.5가 아님
-        System.out.println("통과4");
+
 
 
         for(int i = 0; i < list.size(); i++) { // uid에 해당하는 User가 평가한 영화 목록 중에서 이미 평가한 영화인지 확인
@@ -143,7 +102,7 @@ public class UserController {
                 temp.setTimestamp(timestamp / 1000); // timestamp 설정
                 result = "SUCCESS"; // 성공
                 ratingsService.join(temp); // DB에 저장
-                return "{\"result\":"+result+"\"}";
+                return "{\"result\":"+ result +"\"}";
             }
         }
 
@@ -156,7 +115,17 @@ public class UserController {
         result = "SUCCESS"; // 성공
         ratingsService.join(temp); // DB에 저장
 
-        return "{\"result\":"+result+"\"}";
+        return "{\"result\":"+ result +"\"}";
     }
 
+    // R7
+    @GetMapping("/{userid}/ratings")
+    List<Ratings> return_rating(@PathVariable(name = "userid") String userid) {
+        if(userService.ExistsOnebyUserid(userid))
+        {
+            List<Ratings> list = ratingsService.findByUserid(userid);
+            return list;
+        }
+        return null;
+    }
 }
