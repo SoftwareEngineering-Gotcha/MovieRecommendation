@@ -126,7 +126,7 @@
             $("#result_ratinglist").append("<p>nothing</p>");
           }
           for (rating of res) {
-            $("#result_ratinglist").append("<p>movie id : " + rating["movieId"] + "</p>"
+            $("#result_ratinglist").append("<p>movie id : " + rating["movieid"] + "</p>"
               + "<p>rating : " + rating["rating"] + "</p></div>");
           }
         },
@@ -191,7 +191,7 @@
         success: function (res) {
           $("#result_userlist").empty();
           for (user of res) {
-            $("#result_userlist").append("<div><p>user id : " + user["userId"] + "</p>");
+            $("#result_userlist").append("<div><p>user id : " + user["userid"] + "</p>");
             $("#result_userlist").append("<p>user passwd : " + user["passwd"] + "</p></div>");
           }
         },
