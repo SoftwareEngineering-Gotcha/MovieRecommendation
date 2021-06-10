@@ -12,4 +12,4 @@
 <p> 5. 이제 평가해주시면 됩니다.
 
  ## FrontEnd 접속방법
-  - docker-compose up을 통한 서버 실행 밑 DB 구동 후 http://localhost:8080/ 접속
+  - docker-compose up을 통한 서버 실행 및 DB 구동 후 http://localhost:8080/ 접속
